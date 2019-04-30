@@ -186,3 +186,68 @@ vardas2 vardas 7 4 2 7
 |:---:|:---:|:---:|:---:|
 | 10000 | 9.2s | 9ms | 13ms |
 | 100000 | 894s | 90ms | 150ms |
+
+
+```shell
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int main()
+{
+    int virsunes = 4;
+    int briaunos = virsunes - 1;
+    int briauna[3][2] = { { 1, 2}, { 2, 3 }, { 3, 4} }; // , {  ,  }
+    int kiekV[5] = {0}; //parodo, kiek briaunu turi kiekviena virsune
+
+    for(int i=0; i<briaunos; i++){
+        kiekV[briauna[i][0]]++;
+        kiekV[briauna[i][1]]++;
+    }
+
+    for(int i=0; i<5; i++){
+        printf("V%d ",kiekV[i] );
+    }
+
+    int min, index;
+    for(int i=0; i<virsunes-2; i++){
+        min = INT_MAX; //2,147,483,647
+
+        // Select the vertex which have lowest index and degree as 1.
+		for(int j = 0; j < briaunos; j++){
+
+			if(kiekV[briauna[j][0]] == 1){
+				if(min > briauna[j][0])
+				{
+					min = briauna[j][0];
+					index = j;
+				}
+			}
+			if(kiekV[briauna[j][1]] == 1){
+				if(min > briauna[j][1])
+				{
+					min = briauna[j][1];
+					index = j;
+				}
+			}
+		}
+
+        // Remove the selected vertex by decreasing its degree to 0.
+        printf("pp%d ",kiekV[briauna[index][0]] );
+		kiekV[briauna[index][0]]--;
+		printf("p%d ",kiekV[briauna[index][0]] );
+
+		// Decrement the degree of other vertex, since we have removed the edge.
+		printf("aa%d ", kiekV[briauna[index][0]]);
+		kiekV[briauna[index][1]]--;
+		printf("a%d ", kiekV[briauna[index][0]]);
+
+		// Print the vertex from which leaf vertex is removed.
+		if(kiekV[briauna[index][0]] == 0) printf("%d ", briauna[index][1]);
+		else printf("%d ", briauna[index][0]);
+
+    }
+
+    return 0;
+}
+```
