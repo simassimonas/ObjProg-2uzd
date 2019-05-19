@@ -187,6 +187,7 @@ vardas2 vardas 7 4 2 7
 | 10000 | 9.2s | 9ms | 13ms |
 | 100000 | 894s | 90ms | 150ms |
 
+```shell
 template <typename T>
 class Vector{
 private:
@@ -457,3 +458,5 @@ public:
         return elem + sz;
     }
 };
+
+```
